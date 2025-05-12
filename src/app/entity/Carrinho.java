@@ -12,9 +12,9 @@ public class Carrinho {
     private Integer id;
     private Integer produtoId;
     private int quantidade;
-    private  Integer ingredienteEscolhaId;
+    private Integer ingredienteEscolhaId;
 
-    public Carrinho(Integer id) {
+    public Carrinho() {
     }
 
     public Carrinho(Integer id, Integer produtoId, int quantidade, Integer ingredienteEscolhaId) {

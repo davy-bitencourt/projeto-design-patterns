@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package app.dao;
-import app.conections.Conexao;
 import app.entity.Produto;
 import java.util.List;
 import java.sql.*;
