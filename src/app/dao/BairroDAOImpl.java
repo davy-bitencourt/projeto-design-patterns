@@ -27,7 +27,7 @@ public class BairroDAOImpl implements BairroDAO {
     public List<Bairro> listarBairro() {
         List<Bairro> bairros = new ArrayList<>();
         String sql = "SELECT * FROM bairro";
-        try(Statement stmt = con.createStatement(sql); ResultSet rs = stmt.executeQuery(sql)){
+        try(Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)){
             while(rs.next()){
                 Bairro bairro = new Bairro();
                 bairro.setId(rs.getInt("id"));
