@@ -59,6 +59,7 @@ public class CarrinhoDAOImpl implements CarrinhoDAO {
             stmt.setInt(2, carrinho.getProdutoId());
             stmt.setInt(3, carrinho.getQuantidade());
             stmt.setInt(4, carrinho.getIngredienteEscolhaId());
+            stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

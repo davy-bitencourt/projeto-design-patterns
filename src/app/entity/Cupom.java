@@ -10,7 +10,7 @@ package app.entity;
  */
 public class Cupom {
     private Integer id;
-    private float valorCupom;
+    private Double valorCupom;
     private String codigo;
     private Integer pagamentoId;
     private String validade;
@@ -18,7 +18,7 @@ public class Cupom {
     public Cupom() {
     }
 
-    public Cupom(Integer id, float valorCupom, String codigo, Integer pagamentoId, String validade) {
+    public Cupom(Integer id, Double valorCupom, String codigo, Integer pagamentoId, String validade) {
         this.id = id;
         this.valorCupom = valorCupom;
         this.codigo = codigo;
@@ -34,11 +34,11 @@ public class Cupom {
         this.id = id;
     }
 
-    public float getValorCupom() {
+    public Double getValorCupom() {
         return valorCupom;
     }
 
-    public void setValorCupom(float valorCupom) {
+    public Double setValorCupom(Double valorCupom) {
         this.valorCupom = valorCupom;
     }
 
