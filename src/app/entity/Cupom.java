@@ -38,7 +38,7 @@ public class Cupom {
         return valorCupom;
     }
 
-    public Double setValorCupom(Double valorCupom) {
+    public void setValorCupom(Double valorCupom) {
         this.valorCupom = valorCupom;
     }
 
