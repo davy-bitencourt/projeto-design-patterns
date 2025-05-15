@@ -10,12 +10,12 @@ package app.entity;
  */
 public class Dinheiro {
     private Integer id;
-    private float valorEntrega;
+    private Double valorEntrega;
 
     public Dinheiro() {
     }
 
-    public Dinheiro(Integer id, float valorEntrega) {
+    public Dinheiro(Integer id, Double valorEntrega) {
         this.id = id;
         this.valorEntrega = valorEntrega;
     }
@@ -28,11 +28,11 @@ public class Dinheiro {
         this.id = id;
     }
 
-    public float getValorEntrega() {
+    public Double getValorEntrega() {
         return valorEntrega;
     }
 
-    public void setValorEntrega(float valorEntrega) {
+    public void setValorEntrega(Double valorEntrega) {
         this.valorEntrega = valorEntrega;
     }
     

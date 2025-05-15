@@ -11,7 +11,7 @@ package app.entity;
 public class Entrega {
     private Integer id;
     private Integer clienteId;
-    private boolean tipoEntrega;
+    private Boolean tipoEntrega;
     private Integer deliveryId;
     private Integer pedidoId;
     private Integer statusPedidosId;
@@ -19,7 +19,7 @@ public class Entrega {
     public Entrega() {
     }
 
-    public Entrega(Integer id, Integer clienteId, boolean tipoEntrega, Integer deliveryId, Integer pedidoId, Integer statusPedidosId) {
+    public Entrega(Integer id, Integer clienteId, Boolean tipoEntrega, Integer deliveryId, Integer pedidoId, Integer statusPedidosId) {
         this.id = id;
         this.clienteId = clienteId;
         this.tipoEntrega = tipoEntrega;
@@ -44,11 +44,11 @@ public class Entrega {
         this.clienteId = clienteId;
     }
 
-    public boolean isTipoEntrega() {
+    public Boolean isTipoEntrega() {
         return tipoEntrega;
     }
 
-    public void setTipoEntrega(boolean tipoEntrega) {
+    public void setTipoEntrega(Boolean tipoEntrega) {
         this.tipoEntrega = tipoEntrega;
     }
 
@@ -74,6 +74,10 @@ public class Entrega {
 
     public void setStatusPedidosId(Integer statusPedidosId) {
         this.statusPedidosId = statusPedidosId;
+    }
+
+    public void isTipoEntrega(boolean aBoolean) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

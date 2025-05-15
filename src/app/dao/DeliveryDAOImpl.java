@@ -22,6 +22,15 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     @Override
     public void inserir(Delivery delivery) {
         String sql = "INSERT INTO delivery (chave_entrega, numero, complemento, endereco_id) VALUES (?, ?, ?, ?)";
+        try(PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setString(1, delivery.getChaveEntrega());
+            stmt.setString(2, delivery.getNumero());
+            stmt.setString(3, delivery.getComplemento());
+            stmt.setInt(4, delivery.getEnderecoId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -42,12 +51,27 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 
     @Override
     public void atualizar(Delivery delivery) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "UPDATE delivery SET chave_entrega = ?, numero = ?, complemento = ?, endereco_id = ?";
+        try(PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setString(1, delivery.getChaveEntrega());
+            stmt.setString(2, delivery.getNumero());
+            stmt.setString(3, delivery.getComplemento());
+            stmt.setInt(4, delivery.getEnderecoId());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deletar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM delivery WHERE id = ?";
+        try(PreparedStatement stmt = con.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     
