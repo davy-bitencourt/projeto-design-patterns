@@ -11,12 +11,12 @@ package app.entity;
 public class IngredienteAdicionar {
     private Integer id;
     private String nome;
-    private float valor;
+    private Double valor;
 
     public IngredienteAdicionar() {
     }
 
-    public IngredienteAdicionar(Integer id, String nome, float valor) {
+    public IngredienteAdicionar(Integer id, String nome, Double valor) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -38,11 +38,11 @@ public class IngredienteAdicionar {
         this.nome = nome;
     }
 
-    public float getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
     
