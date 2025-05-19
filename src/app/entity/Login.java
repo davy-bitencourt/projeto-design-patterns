@@ -11,7 +11,7 @@ package app.entity;
 public class Login {
     private Integer id;
     private String senha;
-    private int loginFuncionario;
+    private Integer loginFuncionario;
 
     public Login() {
     }
