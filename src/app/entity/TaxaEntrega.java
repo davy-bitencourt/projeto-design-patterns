@@ -11,12 +11,12 @@ package app.entity;
 public class TaxaEntrega {
     private Integer id;
     private Integer enderecoId;
-    private float traxaEntrega;
+    private Double traxaEntrega;
 
     public TaxaEntrega() {
     }
 
-    public TaxaEntrega(Integer id, Integer enderecoId, float traxaEntrega) {
+    public TaxaEntrega(Integer id, Integer enderecoId, Double traxaEntrega) {
         this.id = id;
         this.enderecoId = enderecoId;
         this.traxaEntrega = traxaEntrega;
@@ -38,11 +38,11 @@ public class TaxaEntrega {
         this.enderecoId = enderecoId;
     }
 
-    public float getTraxaEntrega() {
+    public Double getTraxaEntrega() {
         return traxaEntrega;
     }
 
-    public void setTraxaEntrega(float traxaEntrega) {
+    public void setTraxaEntrega(Double traxaEntrega) {
         this.traxaEntrega = traxaEntrega;
     }
     
