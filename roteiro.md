@@ -8,7 +8,7 @@
 - [x] cada item deve possuir os métodos básicos de CRUD em JDBC;
 
 #### Parte 3
-- [ ] atualizar a conexão para o padrão singleton;
+- [x] atualizar a conexão para o padrão singleton;
 - [ ] corrigir os DAOs;
 - [ ] inplementar os controllers;
 - [ ] inplementar os DTOs.

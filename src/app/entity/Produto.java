@@ -45,6 +45,4 @@ public class Produto {
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
-    
-    
 }

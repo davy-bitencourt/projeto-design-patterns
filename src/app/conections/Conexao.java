@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 
 public class Conexao {
     private static Connection con;
-    private String url;
-    private String user;
-    private String password;
+    private static String url;
+    private static String user;
+    private static String password;
     private static Conexao obj;
     
     private Conexao() throws SQLException {
@@ -39,5 +39,4 @@ public class Conexao {
         con.setAutoCommit(true);
         return con;
     }
-
 }
