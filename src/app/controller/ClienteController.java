@@ -5,8 +5,10 @@
 package app.controller;
 
 import app.dao.ClienteDAO;
+import app.dao.ClienteDAOImpl;
 import app.dto.ClienteDTO;
 import app.entity.Cliente;
+import java.sql.Connection;
 import java.util.List;
 /**
  *
@@ -16,8 +18,8 @@ public class ClienteController {
     
     private ClienteDAO clienteDAO;
 
-    public ClienteController(ClienteDAO clienteDAO) {
-        this.clienteDAO = clienteDAO;
+    public ClienteController(Connection con) {
+        this.clienteDAO = new ClienteDAOImpl(con);
     }
     
     public void salvar(ClienteDTO dto){

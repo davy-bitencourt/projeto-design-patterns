@@ -5,9 +5,11 @@
 package app.controller;
 
 import app.dao.BairroDAO;
+import app.dao.BairroDAOImpl;
 import app.dao.ClienteDAO;
 import app.dto.BairroDTO;
 import app.entity.Bairro;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -17,8 +19,8 @@ import java.util.List;
 public class BairroController {
      private BairroDAO bairroDAO;
 
-    public BairroController(BairroDAO bairroDAO) {
-        this.bairroDAO = bairroDAO;
+    public BairroController(Connection con) {
+        this.bairroDAO = new BairroDAOImpl(con);
     }
     
     public void salvar(BairroDTO dto){

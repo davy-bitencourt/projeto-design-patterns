@@ -5,8 +5,10 @@
 package app.controller;
 
 import app.dao.EnderecoDAO;
+import app.dao.EnderecoDAOImpl;
 import app.dto.EnderecoDTO;
 import app.entity.Endereco;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -16,8 +18,8 @@ import java.util.List;
 public class EnderecoController {
     private EnderecoDAO enderecoDAO;
 
-    public EnderecoController(EnderecoDAO enderecoDAO) {
-        this.enderecoDAO = enderecoDAO;
+    public EnderecoController(Connection con) {
+        this.enderecoDAO = new EnderecoDAOImpl(con);
     }
     
     public void salvar(EnderecoDTO dto){

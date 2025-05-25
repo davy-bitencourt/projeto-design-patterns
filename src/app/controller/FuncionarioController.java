@@ -5,8 +5,10 @@
 package app.controller;
 
 import app.dao.FuncionarioDAO;
+import app.dao.FuncionarioDAOImpl;
 import app.dto.FuncionarioDTO;
 import app.entity.Funcionario;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -16,8 +18,8 @@ import java.util.List;
 public class FuncionarioController {
     private FuncionarioDAO funcionarioDAO;
 
-    public FuncionarioController(FuncionarioDAO funcionarioDAO) {
-        this.funcionarioDAO = funcionarioDAO;
+    public FuncionarioController(Connection con) {
+        this.funcionarioDAO = new FuncionarioDAOImpl(con);
     }
     
     public void salvar(FuncionarioDTO dto){
