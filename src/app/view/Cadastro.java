@@ -57,10 +57,10 @@ public class Cadastro extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Salvar");
         jPanel3.add(jButton1);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Cancelar");
         jPanel3.add(jButton2);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
