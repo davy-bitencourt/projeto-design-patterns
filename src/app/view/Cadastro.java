@@ -3,9 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package app.view;
-import app.interfaces.InterfaceController;
-import app.interfaces.InterfaceDTO;
-import app.interfaces.InterfacePainel;
+import app.interfaces.*;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 
@@ -63,7 +61,7 @@ public class Cadastro extends javax.swing.JDialog {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 

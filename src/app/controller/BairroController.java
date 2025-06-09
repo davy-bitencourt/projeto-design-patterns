@@ -6,11 +6,11 @@ package app.controller;
 
 import app.dao.BairroDAO;
 import app.dto.BairroDTO;
+import app.interfaces.*;
 import app.entity.Bairro;
 import java.sql.Connection;
 import java.util.List;
-import app.interfaces.InterfaceController;
-import app.interfaces.InterfaceDTO;
+
 
 /**
  *
