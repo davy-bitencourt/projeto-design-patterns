@@ -4,6 +4,12 @@
  */
 package app.view;
 
+import app.controller.*;
+import app.dto.*;
+import app.view.cadastros.*;    
+import app.interfaces.InterfaceDTO;
+
+
 /**
  *
  * @author Dave
@@ -37,7 +43,21 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        Bairro = new javax.swing.JMenuItem();
+        Cliente = new javax.swing.JMenuItem();
+        Endereco = new javax.swing.JMenuItem();
+        Funcionario = new javax.swing.JMenuItem();
+        Login = new javax.swing.JMenuItem();
+        Produto = new javax.swing.JMenuItem();
+        Telefone = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        Bairro2 = new javax.swing.JMenuItem();
+        Cliente2 = new javax.swing.JMenuItem();
+        Endereco2 = new javax.swing.JMenuItem();
+        Funcionario2 = new javax.swing.JMenuItem();
+        Login1 = new javax.swing.JMenuItem();
+        Produto2 = new javax.swing.JMenuItem();
+        Telefone1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +84,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(jButton4);
 
         jButton5.setText("Sair");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -77,9 +102,123 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Cadatrar");
+
+        Bairro.setText("Bairro");
+        Bairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BairroActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Bairro);
+
+        Cliente.setText("Cliente");
+        Cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClienteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Cliente);
+
+        Endereco.setText("Endereco");
+        Endereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnderecoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Endereco);
+
+        Funcionario.setText("Funcionário");
+        Funcionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FuncionarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Funcionario);
+
+        Login.setText("Login");
+        Login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Login);
+
+        Produto.setText("Produto");
+        Produto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProdutoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Produto);
+
+        Telefone.setText("Telefone");
+        Telefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TelefoneActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Telefone);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Listar");
+
+        Bairro2.setText("Bairro");
+        Bairro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bairro2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Bairro2);
+
+        Cliente2.setText("Cliente");
+        Cliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cliente2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Cliente2);
+
+        Endereco2.setText("Endereco");
+        Endereco2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Endereco2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Endereco2);
+
+        Funcionario2.setText("Funcionário");
+        Funcionario2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Funcionario2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Funcionario2);
+
+        Login1.setText("Login");
+        Login1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Login1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Login1);
+
+        Produto2.setText("Produto");
+        Produto2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Produto2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Produto2);
+
+        Telefone1.setText("Telefone");
+        Telefone1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Telefone1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Telefone1);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -94,6 +233,67 @@ public class Principal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void BairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BairroActionPerformed
+        new Cadastro(this, true, new BairroPainel(new BairroDTO()), new BairroController()).setVisible(true);
+    }//GEN-LAST:event_BairroActionPerformed
+
+    private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
+        new Cadastro(this, true, new ClientePainel(new ClienteDTO()), new ClienteController()).setVisible(true);
+    }//GEN-LAST:event_ClienteActionPerformed
+
+    private void EnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnderecoActionPerformed
+        new Cadastro(this, true, new EnderecoPainel(new EnderecoDTO()), new EnderecoController()).setVisible(true);
+    }//GEN-LAST:event_EnderecoActionPerformed
+
+    private void FuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FuncionarioActionPerformed
+        new Cadastro(this, true, new FuncionarioPainel(new FuncionarioDTO()), new FuncionarioController()).setVisible(true);
+    }//GEN-LAST:event_FuncionarioActionPerformed
+
+    private void ProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProdutoActionPerformed
+        new Cadastro(this, true, new ProdutoPainel(new ProdutoDTO()), new ProdutoController()).setVisible(true);
+    }//GEN-LAST:event_ProdutoActionPerformed
+
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        new Cadastro(this, true, new LoginPainel(new LoginDTO()), new LoginController()).setVisible(true);
+    }//GEN-LAST:event_LoginActionPerformed
+
+    private void TelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TelefoneActionPerformed
+        new Cadastro(this, true, new TelefonePainel(new TelefoneDTO()), new TelefoneController()).setVisible(true);
+    }//GEN-LAST:event_TelefoneActionPerformed
+
+    private void Bairro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bairro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Bairro2ActionPerformed
+
+    private void Cliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cliente2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Cliente2ActionPerformed
+
+    private void Endereco2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Endereco2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Endereco2ActionPerformed
+
+    private void Funcionario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Funcionario2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Funcionario2ActionPerformed
+
+    private void Login1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Login1ActionPerformed
+
+    private void Produto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Produto2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Produto2ActionPerformed
+
+    private void Telefone1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Telefone1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Telefone1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here: sair
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +331,20 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Bairro;
+    private javax.swing.JMenuItem Bairro2;
+    private javax.swing.JMenuItem Cliente;
+    private javax.swing.JMenuItem Cliente2;
+    private javax.swing.JMenuItem Endereco;
+    private javax.swing.JMenuItem Endereco2;
+    private javax.swing.JMenuItem Funcionario;
+    private javax.swing.JMenuItem Funcionario2;
+    private javax.swing.JMenuItem Login;
+    private javax.swing.JMenuItem Login1;
+    private javax.swing.JMenuItem Produto;
+    private javax.swing.JMenuItem Produto2;
+    private javax.swing.JMenuItem Telefone;
+    private javax.swing.JMenuItem Telefone1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

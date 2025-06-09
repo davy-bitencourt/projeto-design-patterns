@@ -5,9 +5,10 @@
 package app.controller;
 
 import app.dao.EnderecoDAO;
-import app.dao.EnderecoDAOImpl;
 import app.dto.EnderecoDTO;
 import app.entity.Endereco;
+import app.interfaces.InterfaceController;
+import app.interfaces.InterfaceDTO;
 import java.sql.Connection;
 import java.util.List;
 
@@ -15,29 +16,60 @@ import java.util.List;
  *
  * @author laboratorio
  */
-public class EnderecoController {
-    private EnderecoDAO enderecoDAO;
+public class EnderecoController extends InterfaceController {
+    private EnderecoDAO dao;
+    
+    public EnderecoController() {
+        dao = new EnderecoDAO();
+        dto = new EnderecoDTO();
+    }
 
-    public EnderecoController(Connection con) {
-        this.enderecoDAO = new EnderecoDAOImpl(con);
+    @Override
+    public Boolean salvar() {
+        try {
+            dao.salvar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(EnderecoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao salvar Endereco", ex);
+            return false;
+        }
     }
-    
-    public void salvar(EnderecoDTO dto){
-        Endereco endereco = dto.builder();
-        enderecoDAO.inserir(endereco);
+
+    @Override
+    public Boolean editar() {
+        try {
+            dao.editar(dto.buildEntidade()); 
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(EnderecoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao editar Endereco", ex);
+            return false;
+        }
     }
-    
-    public void atualizar(EnderecoDTO dto){
-        Endereco endereco = dto.builder();
-        enderecoDAO.atualizar(endereco);
+
+    @Override
+    public List<InterfaceDTO> listar() {
+        try {
+            List lista = dao.listarTodos(Endereco.class); 
+            return dto.preencheLista(lista); 
+        } catch (Exception ex) {
+            System.getLogger(EnderecoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao listar Enderecos", ex);
+            return null;
+        }
     }
-    
-    public void remover(EnderecoDTO dto){
-        Endereco endereco = dto.builder();
-        enderecoDAO.deletar(endereco.getId());
-    }
-    
-    public List<Endereco> listarTodos(){
-        return enderecoDAO.listarEndereco();
+
+    @Override
+    public Boolean remover(Integer id) {
+        try {
+            Endereco endereco = new Endereco(id);
+            dao.remover(endereco); 
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(EnderecoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao remover Endereco", ex);
+            return false;
+        }
     }
 }

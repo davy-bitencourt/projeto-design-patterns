@@ -3,18 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package app.view;
+import app.interfaces.InterfaceController;
+import app.interfaces.InterfaceDTO;
+import app.interfaces.InterfacePainel;
+import java.awt.BorderLayout;
+import java.awt.Frame;
 
 /**
  *
  * @author Dave
  */
-public class Cadastro extends javax.swing.JFrame {
-
+public class Cadastro extends javax.swing.JDialog {
+    private final InterfacePainel painel;
+    private final InterfaceController controller;
     /**
-     * Creates new form Listagem
+     * Creates new form 
      */
-    public Cadastro() {
+    public Cadastro(Frame parent, boolean modal, InterfacePainel painel, InterfaceController controller){
+        super(parent, modal);
         initComponents();
+        this.painel = painel;
+        this.controller = controller;
+        add(this.painel, BorderLayout.CENTER);
+        pack();
+    }
+
+    private Cadastro(Frame parent, boolean modal) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -58,9 +73,19 @@ public class Cadastro extends javax.swing.JFrame {
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton1);
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton2);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -80,6 +105,21 @@ public class Cadastro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        InterfaceDTO dados = painel.getDados();
+        controller.setDto(dados);
+        Integer id = Integer.valueOf(Util.numeroValido(dados.id));
+        if (id > 0) {
+            if (controller.editar()) { dispose(); }
+        } else {
+            if (controller.salvar()) { dispose(); }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,7 +152,6 @@ public class Cadastro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cadastro().setVisible(true);
             }
         });
     }

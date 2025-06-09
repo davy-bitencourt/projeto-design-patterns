@@ -5,40 +5,72 @@
 package app.controller;
 
 import app.dao.BairroDAO;
-import app.dao.BairroDAOImpl;
-import app.dao.ClienteDAO;
 import app.dto.BairroDTO;
 import app.entity.Bairro;
 import java.sql.Connection;
 import java.util.List;
+import app.interfaces.InterfaceController;
+import app.interfaces.InterfaceDTO;
 
 /**
  *
  * @author laboratorio
  */
-public class BairroController {
-     private BairroDAO bairroDAO;
+public class BairroController extends InterfaceController {
+    private BairroDAO dao;
 
-    public BairroController(Connection con) {
-        this.bairroDAO = new BairroDAOImpl(con);
+    public BairroController() {
+        dao = new BairroDAO();
+        dto = new BairroDTO();
+    }
+
+    @Override
+    public Boolean salvar() {
+        try {
+            dao.salvar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(BairroController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao salvar Bairro", ex);
+            return false;
+        }
     }
     
-    public void salvar(BairroDTO dto){
-        Bairro bairro = dto.builder();
-        bairroDAO.inserir(bairro);
+    @Override
+    public Boolean editar() {
+        try {
+            dao.editar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(BairroController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro Durante Edição", ex);
+            return false;
+        }
     }
     
-    public void atualizar(BairroDTO dto){
-        Bairro bairro = dto.builder();
-        bairroDAO.atualizar(bairro);
+    @Override
+    public List<InterfaceDTO> listar() {
+        try {
+            List lista = dao.listarTodos(Bairro.class);
+            
+            return dto.preencheLista(lista);
+        } catch (Exception ex) {
+            System.getLogger(BairroController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro Durante Listamento", ex);
+            return null;
+        }
     }
-    
-    public void remover(BairroDTO dto){
-        Bairro bairro = dto.builder();
-        bairroDAO.deletar(bairro.getId());
-    }
-    
-    public List<Bairro> listarTodos(){
-        return bairroDAO.listarBairro();
+
+  
+    @Override
+    public Boolean remover(Integer id) {
+        try {
+            Bairro bairro = new Bairro(id);
+            dao.remover(bairro);
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(BairroController.class.getName()).log(System.Logger.Level.ERROR, "Erro ao remover Bairro", ex);
+            return false;
+        }
     }
 }

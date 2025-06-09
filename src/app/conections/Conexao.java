@@ -26,7 +26,14 @@ public class Conexao {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public static Conexao getInstance() throws SQLException {
+    if (obj == null) {
+        obj = new Conexao();
+    }
+    return obj;
+}
+
     public static Connection getConexao() throws SQLException{
         return con;
     }

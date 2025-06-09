@@ -4,30 +4,37 @@
  */
 package app.entity;
 
+import app.interfaces.Entidade;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /**
  *
  * @author laboratorio
  */
-public class Login {
-    private Integer id;
+public class Login extends Entidade {
+    
+    private String usuario;
     private String senha;
-    private Integer loginFuncionario;
 
     public Login() {
     }
+    
+    public Login(Integer id) {
+        setId(id);
+    }
 
-    public Login(Integer id, String senha, int loginFuncionario) {
-        this.id = id;
+    public Login(Integer id, String usuario, String senha) {
+        setId(id);
+        this.usuario = usuario;
         this.senha = senha;
-        this.loginFuncionario = loginFuncionario;
     }
 
-    public Integer getId() {
-        return id;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getSenha() {
@@ -38,13 +45,22 @@ public class Login {
         this.senha = senha;
     }
 
-    public int getLoginFuncionario() {
-        return loginFuncionario;
+    @Override
+    public String getInsert() {
+        return "INSERT INTO login (usuario, senha) VALUES (?, ?)";
     }
 
-    public void setLoginFuncionario(int loginFuncionario) {
-        this.loginFuncionario = loginFuncionario;
+    @Override
+    public String getUpdate() {
+        return "UPDATE login SET usuario = ?, senha = ? WHERE id = ?";
     }
-    
-    
+
+    @Override
+    public void setParameter(PreparedStatement ps) throws SQLException {
+        ps.setString(1, usuario);
+        ps.setString(2, senha);
+        if (getId() != null && getId() > 0) {
+            ps.setInt(3, getId());
+        }
+    }
 }

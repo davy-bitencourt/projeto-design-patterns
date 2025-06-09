@@ -4,14 +4,30 @@
  */
 package app.dao;
 import app.entity.Cliente;
+import app.entity.Telefone;
+import app.interfaces.Entidade;
+import app.interfaces.InterfaceDAO;
 import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author Dave
  */
-public interface ClienteDAO {
-    void inserir(Cliente cliente);
-    List<Cliente> listarCliente();
-    void atualizar(Cliente cliente);
-    void deletar(int id);
+public class ClienteDAO extends InterfaceDAO {
+
+    @Override
+    public Entidade preencheDados(ResultSet res) throws SQLException {
+        Cliente c = new Cliente(
+            res.getInt("id"),
+            res.getString("nome")
+        );
+
+        Integer telefoneId = res.getObject("telefone_id") != null ? res.getInt("telefone_id") : null;
+        if (telefoneId != null) {
+            c.setTelefone(new Telefone(telefoneId));
+        }
+
+        return c;
+    }
 }

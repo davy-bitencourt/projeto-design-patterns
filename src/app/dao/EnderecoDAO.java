@@ -4,14 +4,30 @@
  */
 package app.dao;
 import app.entity.Endereco;
+import app.entity.Bairro;
+import app.interfaces.Entidade;
+import app.interfaces.InterfaceDAO;
 import java.util.List;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 /**
  *
  * @author Dave
  */
-public interface EnderecoDAO {
-    void inserir(Endereco endereco);
-    List<Endereco> listarEndereco();
-    void atualizar(Endereco endereco);
-    void deletar(int id);
+public class EnderecoDAO extends InterfaceDAO {
+
+    @Override
+    public Entidade preencheDados(ResultSet res) throws SQLException {
+        Endereco e = new Endereco();
+        e.setId(res.getInt("id"));
+        e.setRua(res.getString("rua"));
+        e.setCep(res.getString("cep"));
+        e.setDistancia(res.getFloat("distancia"));
+
+        // Instancia mínima de Bairro com ID
+        Bairro b = new Bairro(res.getInt("bairro_id"));
+        e.setBairro(b);
+
+        return e;
+    }
 }

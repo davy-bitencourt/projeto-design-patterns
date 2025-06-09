@@ -5,9 +5,10 @@
 package app.controller;
 
 import app.dao.TelefoneDAO;
-import app.dao.TelefoneDAOImpl;
 import app.dto.TelefoneDTO;
 import app.entity.Telefone;
+import app.interfaces.InterfaceController;
+import app.interfaces.InterfaceDTO;
 import java.sql.Connection;
 import java.util.List;
 
@@ -15,29 +16,62 @@ import java.util.List;
  *
  * @author Dave
  */
-public class TelefoneController {
-    private TelefoneDAO telefoneDAO;    
+public class TelefoneController extends InterfaceController {
+    private TelefoneDAO dao;
 
-    public TelefoneController(Connection con) {
-        this.telefoneDAO = new TelefoneDAOImpl(con);
+    public TelefoneController() {
+        dao = new TelefoneDAO();
+        dto = new TelefoneDTO();
     }
     
-    public void inserir(TelefoneDTO dto){
-        Telefone telefone = dto.builder();
-        telefoneDAO.inserir(telefone);
+    @Override
+    public Boolean salvar() {
+        try {
+            dao.salvar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(TelefoneController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao salvar Telefone", ex);
+            return false;
+        }
     }
-    
-    public void atualizar(TelefoneDTO dto){
-        Telefone telefone = dto.builder();
-        telefoneDAO.atualizar(telefone);
+
+    @Override
+    public Boolean editar() {
+        try {
+            dao.editar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(TelefoneController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao editar Telefone", ex);
+            return false;
+        }
     }
-    
-    public void remover(TelefoneDTO dto){
-        Telefone telefone = dto.builder();
-        telefoneDAO.deletar(telefone.getId());
+
+    @Override
+    public List<InterfaceDTO> listar() {
+        try {
+            List lista = dao.listarTodos(Telefone.class);
+            
+            return dto.preencheLista(lista);
+        } catch (Exception ex) {
+            System.getLogger(TelefoneController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao listar Telefones", ex);
+            return null;
+        }
     }
-    
-    public List<Telefone> listarTodos(){
-        return telefoneDAO.listarTelefone();
+
+    @Override
+    public Boolean remover(Integer id) {
+        try {
+            Telefone telefone = new Telefone(id);
+            
+            dao.remover(telefone);
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(TelefoneController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao remover Telefone", ex);
+            return false;
+        }
     }
 }

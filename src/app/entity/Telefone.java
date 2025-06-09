@@ -4,67 +4,96 @@
  */
 package app.entity;
 
+import app.interfaces.Entidade;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /**
  *
  * @author laboratorio
  */
-public class Telefone {
-    private Integer id;
-    private int dd;
-    private int numero;
-    private Integer funcionarioId;
-    private Integer clienteId;
+public class Telefone extends Entidade {
 
+    private String ddd;
+    private String numero;
+    private Funcionario funcionario;  
+    private Cliente cliente;
+    
     public Telefone() {
     }
 
-    public Telefone(Integer id, int dd, int numero, Integer funcionarioId, Integer clienteId) {
-        this.id = id;
-        this.dd = dd;
+    public Telefone(Integer id) {
+        setId(id);
+    }
+
+    public Telefone(String ddd, String numero) {
+        this(null, ddd, numero);
+    }
+
+    public Telefone(Integer id, String ddd, String numero) {
+        setId(id);
+        this.ddd = ddd;
         this.numero = numero;
-        this.funcionarioId = funcionarioId;
-        this.clienteId = clienteId;
     }
 
-    public Integer getId() {
-        return id;
+    public Telefone(Integer id, String ddd, String numero, Funcionario funcionario, Cliente cliente) {
+        setId(id);
+        this.ddd = ddd;
+        this.numero = numero;
+        this.funcionario = funcionario;
+        this.cliente = cliente;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getDdd() {
+        return ddd;
     }
 
-    public int getDd() {
-        return dd;
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
     }
 
-    public void setDd(int dd) {
-        this.dd = dd;
-    }
-
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    public Integer getFuncionarioId() {
-        return funcionarioId;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setFuncionarioId(Integer funcionarioId) {
-        this.funcionarioId = funcionarioId;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public Integer getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(Integer clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-    
-    
+
+    @Override
+    public String getInsert() {
+        return "INSERT INTO telefone (ddd, numero, funcionario_id, cliente_id) VALUES (?, ?, ?, ?)";
+    }
+
+    @Override
+    public String getUpdate() {
+        return "UPDATE telefone SET ddd = ?, numero = ?, funcionario_id = ?, cliente_id = ? WHERE id = ?";
+    }
+
+    @Override
+    public void setParameter(PreparedStatement ps) throws SQLException {
+        ps.setString(1, ddd);
+        ps.setString(2, numero);
+        ps.setObject(3, funcionario != null && funcionario.getId() != null ? funcionario.getId() : null);
+        ps.setObject(4, cliente != null && cliente.getId() != null ? cliente.getId() : null);
+
+        if (getId() != null && getId() > 0) {
+            ps.setInt(5, getId());
+        }
+    }
 }

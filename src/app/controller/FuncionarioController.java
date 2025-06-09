@@ -5,9 +5,10 @@
 package app.controller;
 
 import app.dao.FuncionarioDAO;
-import app.dao.FuncionarioDAOImpl;
 import app.dto.FuncionarioDTO;
 import app.entity.Funcionario;
+import app.interfaces.InterfaceController;
+import app.interfaces.InterfaceDTO;
 import java.sql.Connection;
 import java.util.List;
 
@@ -15,29 +16,61 @@ import java.util.List;
  *
  * @author laboratorio
  */
-public class FuncionarioController {
-    private FuncionarioDAO funcionarioDAO;
-
-    public FuncionarioController(Connection con) {
-        this.funcionarioDAO = new FuncionarioDAOImpl(con);
-    }
+public class FuncionarioController extends InterfaceController {
+    private FuncionarioDAO dao; 
     
-    public void salvar(FuncionarioDTO dto){
-        Funcionario funcionario = dto.builder();
-        funcionarioDAO.inserir(funcionario);
-    }
-    
-    public void atualizar(FuncionarioDTO dto){
-        Funcionario funcionario = dto.builder();
-        funcionarioDAO.atualizar(funcionario);
-    }
-    
-    public void remover(FuncionarioDTO dto){
-        Funcionario funcionario = dto.builder();
-        funcionarioDAO.deletar(funcionario.getId());
+    public FuncionarioController() {
+        dao = new FuncionarioDAO();
+        dto = new FuncionarioDTO();
     }
 
-    public List<Funcionario> listarTodos(){
-        return funcionarioDAO.listarFuncionario();
+    @Override
+    public Boolean salvar() {
+        try {
+            dao.salvar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(FuncionarioController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao salvar Funcionario", ex);
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean editar() {
+        try {
+            dao.editar(dto.buildEntidade()); 
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(FuncionarioController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao editar Funcionario", ex);
+            return false;
+        }
+    }
+
+    @Override
+    public List<InterfaceDTO> listar() {
+        try {
+            List lista = dao.listarTodos(Funcionario.class);
+            return dto.preencheLista(lista); 
+        } catch (Exception ex) {
+            System.getLogger(FuncionarioController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao listar Funcionarios", ex);
+            return null;
+        }
+    }
+
+    @Override
+    public Boolean remover(Integer id) {
+        try {
+            Funcionario funcionario = new Funcionario(id);
+            
+            dao.remover(funcionario);
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(FuncionarioController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao remover Funcionario", ex);
+            return false;
+        }
     }
 }

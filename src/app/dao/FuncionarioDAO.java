@@ -4,14 +4,29 @@
  */
 package app.dao;
 import app.entity.Funcionario;
+import app.entity.Login;
+import app.interfaces.Entidade;
+import app.interfaces.InterfaceDAO;
 import java.util.List;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Dave
  */
-public interface FuncionarioDAO {
-    void inserir(Funcionario funcionario);
-    List<Funcionario> listarFuncionario();
-    void atualizar(Funcionario funcionario);
-    void deletar(int id);
+public class FuncionarioDAO extends InterfaceDAO {
+
+    @Override
+    public Entidade preencheDados(ResultSet res) throws SQLException {
+        Funcionario f = new Funcionario(res.getInt("id"), res.getString("nome"), res.getString("cpf"), res.getString("rg"), null, null 
+        );
+
+        Integer loginId = res.getObject("login_id") != null ? res.getInt("login_id") : null;
+        if (loginId != null) {
+            f.setLogin(new Login(loginId));
+        }
+
+        return f;
+    }
 }

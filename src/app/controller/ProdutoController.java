@@ -5,41 +5,70 @@
 package app.controller;
 import app.entity.Produto;
 import app.dao.ProdutoDAO;
-import app.dao.ProdutoDAOImpl;
 import app.dto.ProdutoDTO;
+import app.interfaces.InterfaceController;
+import app.interfaces.InterfaceDTO;
 import java.sql.*;
 import java.util.List;
 /**
  *
  * @author Dave
  */
-public class ProdutoController {
+public class ProdutoController extends InterfaceController {
+    private ProdutoDAO dao;
     
-    private ProdutoDAO produtoDAO;
-    
-    public ProdutoController(Connection con){
-        this.produtoDAO = new ProdutoDAOImpl(con);
+    public ProdutoController() {
+        dao = new ProdutoDAO();
+        dto = new ProdutoDTO();
     }
-    
-    public void salvar(ProdutoDTO dto){
-        Produto produto = dto.builder();
-        produtoDAO.inserir(produto);
-    }
-    
-    public void atualizar(ProdutoDTO dto){
-        Produto produto = dto.builder();
-        produtoDAO.atualizar(produto);
-    }
-    
-    public void remover(ProdutoDTO dto){
-        Produto produto = dto.builder();
-        if(produto.getId() != null){
-            produtoDAO.deletar(produto.getId());
+
+    @Override
+    public Boolean salvar() {
+        try {
+            dao.salvar(dto.buildEntidade());
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(ProdutoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao salvar Produto", ex);
+            return false;
         }
     }
-    
-    public List<Produto> listarTodos(){
-        return produtoDAO.listarProduto();
+
+    @Override
+    public Boolean editar() {
+        try {
+            dao.editar(dto.buildEntidade()); 
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(ProdutoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao editar Produto", ex);
+            return false;
+        }
+    }
+
+    @Override
+    public List<InterfaceDTO> listar() {
+        try {
+            List lista = dao.listarTodos(Produto.class);
+            return dto.preencheLista(lista); 
+        } catch (Exception ex) {
+            System.getLogger(ProdutoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao listar Produtos", ex);
+            return null;
+        }
+    }
+
+    @Override
+    public Boolean remover(Integer id) {
+        try {
+            Produto produto = new Produto(id);
+            
+            dao.remover(produto);
+            return true;
+        } catch (Exception ex) {
+            System.getLogger(ProdutoController.class.getName())
+                  .log(System.Logger.Level.ERROR, "Erro ao remover Produto", ex);
+            return false;
+        }
     }
 }
- 
